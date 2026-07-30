@@ -1,7 +1,7 @@
 {
   "name": "roblox-scripts-bot",
   "version": "1.0.0",
-  "description": "Delta Update Bot",
+  "description": "Bot Roblox Scripts",
   "main": "index.js",
   "scripts": {
     "start": "node index.js"
