@@ -24,7 +24,7 @@ const CHANNEL_ID = "1532295157897232464";
 const ROLE_ID = "1532297126120263752";
 
 // Site que será monitorado
-const URL = "https://delta.filenetwork.vip/android.html";
+const URL = "https://example.com";
 
 let ultimaVersao = "";
 
