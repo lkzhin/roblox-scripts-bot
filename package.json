@@ -1,99 +1,114 @@
 require("dotenv").config();
 
 const {
-  Client,
-  GatewayIntentBits,
-  EmbedBuilder
+    Client,
+    GatewayIntentBits,
+    EmbedBuilder
 } = require("discord.js");
 
 const client = new Client({
-  intents: [
-    GatewayIntentBits.Guilds,
-    GatewayIntentBits.GuildMessages,
-    GatewayIntentBits.MessageContent
-  ]
+    intents: [
+        GatewayIntentBits.Guilds,
+        GatewayIntentBits.GuildMessages,
+        GatewayIntentBits.MessageContent
+    ]
 });
 
-// ID do canal
+// ID do canal de atualizações
 const CHANNEL_ID = "1532295157897232464";
 
-// ID do cargo
+// ID do cargo @Atualização
 const ROLE_ID = "1532297126120263752";
 
+// Link do Delta
+const URL = "https://delta.filenetwork.vip/android.html";
+
 client.once("ready", async () => {
-  console.log(`${client.user.tag} está online!`);
+    console.log(`${client.user.tag} está online!`);
 
-  try {
-    const channel = await client.channels.fetch(CHANNEL_ID);
+    try {
+        const channel = await client.channels.fetch(CHANNEL_ID);
 
-    const embed = new EmbedBuilder()
-      .setColor("#0099ff")
-      .setTitle("🚀 Nova atualização disponível!")
-      .setDescription("Confira a versão mais recente abaixo.")
-      .addFields(
-        {
-          name: "📥 Download",
-          value: "https://delta.filenetwork.vip/android.html"
-        },
-        {
-          name: "📝 Changelog",
-          value:
-            "• Correções de bugs\n• Melhor desempenho\n• Novos recursos"
-        }
-      )
-      .setTimestamp()
-      .setFooter({
-        text: "Roblox Scripts Bot"
-      });
+        const embed = new EmbedBuilder()
+            .setColor("#0099ff")
+            .setTitle("🚀 Nova atualização disponível!")
+            .setDescription("Confira a versão mais recente abaixo.")
+            .addFields(
+                {
+                    name: "📥 Download",
+                    value: URL
+                },
+                {
+                    name: "📋 Status",
+                    value: "Nova atualização detectada automaticamente."
+                }
+            )
+            .setTimestamp()
+            .setFooter({
+                text: "Roblox Scripts Bot"
+            });
 
-    await channel.send({
-      content: `<@&${ROLE_ID}>`,
-      embeds: [embed]
-    });
+        await channel.send({
+            content: `<@&${ROLE_ID}>`,
+            embeds: [embed]
+        });
 
-  } catch (err) {
-    console.log(err);
-  }
+    } catch (err) {
+        console.log(err);
+    }
 });
 
 client.on("messageCreate", async (message) => {
-  if (message.author.bot) return;
 
-  if (message.content === "!ping") {
-    return message.reply("🏓 Pong!");
-  }
+    if (message.author.bot) return;
 
-  if (message.content === "!delta") {
-    return message.reply("https://delta.filenetwork.vip/android.html");
-  }
+    if (message.content === "!ping") {
+        return message.reply("🏓 Pong!");
+    }
 
-  if (message.content === "!teste") {
+    if (message.content === "!delta") {
 
-    const embed = new EmbedBuilder()
-      .setColor("#0099ff")
-      .setTitle("🚀 Nova atualização disponível!")
-      .setDescription("Confira a versão mais recente abaixo.")
-      .addFields(
-        {
-          name: "📥 Download",
-          value: "https://delta.filenetwork.vip/android.html"
-        },
-        {
-          name: "📝 Changelog",
-          value:
-            "• Correções de bugs\n• Melhor desempenho\n• Novos recursos"
-        }
-      )
-      .setTimestamp()
-      .setFooter({
-        text: "Roblox Scripts Bot"
-      });
+        const embed = new EmbedBuilder()
+            .setColor("#0099ff")
+            .setTitle("🚀 Delta Android")
+            .addFields({
+                name: "📥 Download",
+                value: URL
+            })
+            .setTimestamp();
 
-    await message.channel.send({
-      content: `<@&${ROLE_ID}>`,
-      embeds: [embed]
-    });
-  }
+        return message.reply({
+            embeds: [embed]
+        });
+    }
+
+    if (message.content === "!teste") {
+
+        const embed = new EmbedBuilder()
+            .setColor("#0099ff")
+            .setTitle("🚀 Nova atualização disponível!")
+            .setDescription("Confira a versão mais recente abaixo.")
+            .addFields(
+                {
+                    name: "📥 Download",
+                    value: URL
+                },
+                {
+                    name: "📋 Status",
+                    value: "Nova atualização detectada automaticamente."
+                }
+            )
+            .setTimestamp()
+            .setFooter({
+                text: "Roblox Scripts Bot"
+            });
+
+        return message.channel.send({
+            content: `<@&${ROLE_ID}>`,
+            embeds: [embed]
+        });
+    }
+
 });
 
 client.login(process.env.TOKEN);
